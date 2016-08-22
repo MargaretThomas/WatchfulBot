@@ -1,12 +1,14 @@
-﻿using System;
-using System.Linq;
+﻿/*
+ * Receive a message from a user, use LUIS to identify intent, run chunk of code for the intent.
+ * Last Modified: 22 Aug 2016.
+ */
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
+using Microsoft.Bot.Builder.Dialogs;
+using WatchfulBot.LUIS;
 
 namespace WatchfulBot
 {
@@ -15,19 +17,13 @@ namespace WatchfulBot
     {
         /// <summary>
         /// POST: api/Messages
-        /// Receive a message from a user and reply to it
+        /// Receive a message from a user, do something, reply to user.
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                // calculate something for us to return
-                int length = (activity.Text ?? string.Empty).Length;
-
-                // return our reply to the user
-                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
-                await connector.Conversations.ReplyToActivityAsync(reply);
+                await Conversation.SendAsync(activity, () => new LuisDialogWithTrakt());
             }
             else
             {
