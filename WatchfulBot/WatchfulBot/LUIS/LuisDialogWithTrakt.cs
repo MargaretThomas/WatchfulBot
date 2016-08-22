@@ -68,7 +68,7 @@ namespace WatchfulBot.LUIS
                         // Make nice string.
                         foreach (var item in responseJSON)
                         {
-                            returnMessage += string.Concat(Environment.NewLine, item.shows.title);
+                            returnMessage += string.Concat(Environment.NewLine, Environment.NewLine, item.shows.title);
                         }
                     }
                     else
@@ -107,7 +107,7 @@ namespace WatchfulBot.LUIS
                         // Make nice string.
                         foreach (var item in responseJSON)
                         {
-                            returnMessage += string.Concat(Environment.NewLine, item.shows.title);
+                            returnMessage += string.Concat(Environment.NewLine, Environment.NewLine, item.shows.title);
                         }
                     }
                     else
