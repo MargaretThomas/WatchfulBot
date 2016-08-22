@@ -16,7 +16,7 @@ using WatchfulBot.Models;
 
 namespace WatchfulBot.LUIS
 {
-    [LuisModel("b1cd889f-e37f-4694-bdb7-c19789b43205", "e686ad6ca03b4cf29d26288783935568")]
+    [LuisModel("b1cd889f-e37f-4694-bdb7-c19789b43205", "")]
     [Serializable]
     public class LuisDialogWithTrakt : LuisDialog<object>
     {
