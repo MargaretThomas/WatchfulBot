@@ -39,12 +39,13 @@ namespace WatchfulBot.LUIS
         [LuisIntent("intent.watchfulbot.greetings.hello")]
         public async Task Greetings(IDialogContext context, LuisResult result)
         {
+            Console.WriteLine("we got here - luis");
             string message = "Hey there! I'm WatchfulBot, you can ask for a list of popular/trending TV shows";
             await context.PostAsync(message);
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("intent.traktbotsession.movie.popular")]
+        [LuisIntent("intent.watchfulbot.shows.popular")]
         public async Task Popular(IDialogContext context, LuisResult result)
         {
             // Function 1:
@@ -84,7 +85,7 @@ namespace WatchfulBot.LUIS
             context.Wait(MessageReceived);
         }
 
-        [LuisIntent("intent.traktbotsession.movie.trending")]
+        [LuisIntent("intent.watchfulbot.shows.trending")]
         public async Task Trending(IDialogContext context, LuisResult result)
         {
             // Function 2:
