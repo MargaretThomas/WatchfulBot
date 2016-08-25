@@ -1,6 +1,6 @@
 ﻿/*
  * Receive a message from a user, use LUIS to identify intent, run chunk of code for the intent.
- * Last Modified: 22 Aug 2016.
+ * Last Modified: 25 Aug 2016.
  */
 using System.Net;
 using System.Net.Http;
@@ -9,6 +9,7 @@ using System.Web.Http;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using WatchfulBot.LUIS;
+using System.Web.Http.Description;
 
 namespace WatchfulBot
 {
@@ -19,6 +20,7 @@ namespace WatchfulBot
         /// POST: api/Messages
         /// Receive a message from a user, do something, reply to user.
         /// </summary>
+        [ResponseType(typeof(void))]
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             if (activity.Type == ActivityTypes.Message)
@@ -29,8 +31,7 @@ namespace WatchfulBot
             {
                 HandleSystemMessage(activity);
             }
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            return response;
+            return new HttpResponseMessage(System.Net.HttpStatusCode.Accepted);
         }
 
         private Activity HandleSystemMessage(Activity message)
